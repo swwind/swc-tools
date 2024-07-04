@@ -1,0 +1,23 @@
+{
+  "name": "@swwind/remove-exports",
+  "version": "2.0.1",
+  "author": "swwind <i@sww.moe>",
+  "license": "MIT",
+  "keywords": [
+    "swc-plugin"
+  ],
+  "main": "./remove_exports.wasm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swwind/swc-tools.git"
+  },
+  "scripts": {
+    "build": "cargo build-wasi --release && cp ../../target/wasm32-wasi/release/remove_exports.wasm .",
+    "prepublishOnly": "pnpm build"
+  },
+  "files": [
+    "remove_exports.wasm",
+    "README.md"
+  ],
+  "preferUnplugged": true
+}
