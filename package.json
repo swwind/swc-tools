@@ -13,6 +13,7 @@
     "@swc/core": "^1.6.7",
     "@swwind/find-exports": "workspace:^",
     "@swwind/get-exports": "workspace:^",
-    "@swwind/remove-exports": "workspace:^"
+    "@swwind/remove-exports": "workspace:^",
+    "@swwind/treeshake-events": "workspace:^"
   }
 }

@@ -20,12 +20,17 @@ importers:
       '@swwind/remove-exports':
         specifier: workspace:^
         version: link:packages/remove-exports
+      '@swwind/treeshake-events':
+        specifier: workspace:^
+        version: link:packages/treeshake-events
 
   packages/find-exports: {}
 
   packages/get-exports: {}
 
   packages/remove-exports: {}
+
+  packages/treeshake-events: {}
 
 packages:
 

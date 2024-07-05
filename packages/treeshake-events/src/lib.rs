@@ -12,19 +12,29 @@ use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata
 
 #[derive(Deserialize)]
 struct TreeshakeEventsConfig {
+    #[serde(default = "default_jsxs")]
     jsxs: Vec<String>,
+    #[serde(default = "default_matches")]
     matches: Vec<String>,
+}
+
+fn default_jsxs() -> Vec<String> {
+    vec![
+        String::from("jsx"),
+        String::from("jsxs"),
+        String::from("jsxDEV"),
+    ]
+}
+
+fn default_matches() -> Vec<String> {
+    vec![String::from("^on[A-Z]")]
 }
 
 impl Default for TreeshakeEventsConfig {
     fn default() -> Self {
         Self {
-            jsxs: vec![
-                String::from("jsx"),
-                String::from("jsxs"),
-                String::from("jsxDEV"),
-            ],
-            matches: vec![String::from("^on[A-Z]")],
+            jsxs: default_jsxs(),
+            matches: default_matches(),
         }
     }
 }
@@ -110,6 +120,8 @@ impl VisitMut for TreeshakeEventsVisitor {
                 }
             }
         }
+
+        n.visit_mut_children_with(self);
     }
 }
 
@@ -195,6 +207,22 @@ mod test {
     test_inline!(
         Default::default(),
         |_| as_folder(TreeshakeEventsVisitor::default()),
+        should_not_effect_non_intristic_elements,
+        r#"
+        import { jsx as _jsx } from "preact/jsx-runtime";
+        _jsx("div", { onClick: () => console.log(1919810) });
+        _jsx(App, { onClick: () => console.log(114514) });
+        "#,
+        r#"
+        import { jsx as _jsx } from "preact/jsx-runtime";
+        _jsx("div", {});
+        _jsx(App, { onClick: () => console.log(114514) });
+        "#
+    );
+
+    test_inline!(
+        Default::default(),
+        |_| as_folder(TreeshakeEventsVisitor::default()),
         should_not_effect_normal_properties,
         r#"
         import { jsx as _jsx } from "preact/jsx-runtime";
@@ -203,6 +231,33 @@ mod test {
         r#"
         import { jsx as _jsx } from "preact/jsx-runtime";
         _jsx("div", { id: "app" });
+        "#
+    );
+
+    test_inline!(
+        Default::default(),
+        |_| as_folder(TreeshakeEventsVisitor::default()),
+        should_work_recursively,
+        r#"
+        import { jsx as _jsx } from "preact/jsx-runtime";
+        _jsx("div", {
+            id: "app",
+            onClick: () => console.log(1919810),
+            children: [
+                _jsx("p", { id: "p", onClick: () => alert(114514) }),
+                _jsx("span", { id: "span", onClick: () => alert(23333) }),
+            ]
+        });
+        "#,
+        r#"
+        import { jsx as _jsx } from "preact/jsx-runtime";
+        _jsx("div", {
+            id: "app",
+            children: [
+                _jsx("p", { id: "p" }),
+                _jsx("span", { id: "span" }),
+            ]
+        });
         "#
     );
 }
