@@ -6,13 +6,12 @@
   "scripts": {
     "build": "pnpm build:remove-exports",
     "build:remove-exports": "cd packages/remove-exports && pnpm build",
-    "test": "mocha"
+    "test": "node test/index.js"
   },
   "dependencies": {
     "@swc/core": "^1.6.7",
     "@swwind/find-exports": "workspace:^",
     "@swwind/get-exports": "workspace:^",
-    "@swwind/remove-exports": "workspace:^",
-    "mocha": "^10.6.0"
+    "@swwind/remove-exports": "workspace:^"
   }
 }

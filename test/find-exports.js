@@ -1,6 +1,7 @@
 import { find } from "@swwind/find-exports";
 import { parseSync } from "@swc/core";
 import { deepEqual as assertEquals, throws as assertThrows } from "node:assert";
+import { describe, it } from "node:test";
 
 function find_exports(code, funcs) {
   const ast = parseSync(code, {

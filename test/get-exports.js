@@ -1,6 +1,7 @@
 import { get } from "@swwind/get-exports";
 import { parseSync } from "@swc/core";
 import { deepEqual as assertEquals, throws as assertThrows } from "node:assert";
+import { describe, it } from "node:test";
 
 /**
  * @param {string} code

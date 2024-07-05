@@ -1,5 +1,6 @@
 import assert from "node:assert";
 import { transform } from "@swc/core";
+import { describe, it } from "node:test";
 
 /**
  * @param {string} source
