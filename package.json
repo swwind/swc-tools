@@ -2,12 +2,17 @@
   "name": "swc-tools",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "pnpm build:remove-exports",
     "build:remove-exports": "cd packages/remove-exports && pnpm build",
-    "test": "pnpm test:get-exports && pnpm test:find-exports && pnpm test:remove-exports",
-    "test:get-exports": "cd packages/get-exports && pnpm test",
-    "test:find-exports": "cd packages/find-exports && pnpm test",
-    "test:remove-exports": "cd tests/remove-exports-tests && pnpm test"
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@swc/core": "^1.6.7",
+    "@swwind/find-exports": "workspace:^",
+    "@swwind/get-exports": "workspace:^",
+    "@swwind/remove-exports": "workspace:^",
+    "mocha": "^10.6.0"
   }
 }

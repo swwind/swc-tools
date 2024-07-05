@@ -1,12 +1,10 @@
-import { deepEqual as assertEquals, throws as assertThrows } from "node:assert";
-import { describe, it } from "node:test";
-
-import { get } from "./mod.js";
+import { get } from "@swwind/get-exports";
 import { parseSync } from "@swc/core";
+import { deepEqual as assertEquals, throws as assertThrows } from "node:assert";
 
 /**
  * @param {string} code
- * @returns {import("./mod.js").Export[]}
+ * @returns {import("@swwind/get-exports").Export[]}
  */
 function get_exports(code) {
   const module = parseSync(code, { syntax: "typescript", tsx: true });

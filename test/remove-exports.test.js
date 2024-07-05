@@ -1,4 +1,3 @@
-import { describe, it } from "node:test";
 import assert from "node:assert";
 import { transform } from "@swc/core";
 
@@ -7,7 +6,7 @@ import { transform } from "@swc/core";
  * @param {string[]} removes
  * @returns {Promise<string>}
  */
-async function removeExports(source, removes) {
+async function remove_exports(source, removes) {
   const { code } = await transform(source, {
     jsc: {
       experimental: {
@@ -45,7 +44,7 @@ function assertEquals(code1, code2) {
  * @param {string} expect
  */
 async function test(source, removes, expect) {
-  assertEquals(await removeExports(source, removes), expect);
+  assertEquals(await remove_exports(source, removes), expect);
 }
 
 /**
@@ -54,7 +53,7 @@ async function test(source, removes, expect) {
  * @param {string[]} removes
  */
 async function empty(source, removes) {
-  assertEquals(await removeExports(source, removes), "");
+  assertEquals(await remove_exports(source, removes), "");
 }
 
 describe("@swwind/remove-exports", () => {
