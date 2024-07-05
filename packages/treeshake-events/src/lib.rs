@@ -66,9 +66,8 @@ impl TreeshakeEventsVisitor {
         self.jsxs_ids.contains(&ident.to_id())
     }
 
-    fn should_remove(&self, ident: &Ident) -> bool {
-        let name = ident.sym.to_string();
-        self.matches.iter().any(|regex| regex.is_match(&name))
+    fn should_remove(&self, name: &String) -> bool {
+        self.matches.iter().any(|regex| regex.is_match(name))
     }
 }
 
@@ -102,15 +101,17 @@ impl VisitMut for TreeshakeEventsVisitor {
                         if let Some(obj) = prop.expr.as_mut_object() {
                             obj.props.retain(|x| match x {
                                 PropOrSpread::Prop(p) => match p.as_ref() {
-                                    Prop::Shorthand(id) => !self.should_remove(&id),
-                                    Prop::KeyValue(KeyValueProp {
-                                        key: PropName::Ident(id),
-                                        ..
-                                    }) => !self.should_remove(&id),
-                                    Prop::Method(MethodProp {
-                                        key: PropName::Ident(id),
-                                        ..
-                                    }) => !self.should_remove(&id),
+                                    Prop::Shorthand(id) => !self.should_remove(&id.sym.to_string()),
+                                    Prop::KeyValue(KeyValueProp { key, .. })
+                                    | Prop::Method(MethodProp { key, .. }) => match key {
+                                        PropName::Ident(ident) => {
+                                            !self.should_remove(&ident.sym.to_string())
+                                        }
+                                        PropName::Str(s) => {
+                                            !self.should_remove(&s.value.to_string())
+                                        }
+                                        _ => true,
+                                    },
                                     _ => true,
                                 },
                                 _ => true,
@@ -167,6 +168,34 @@ mod test {
         r#"
         import { jsx } from "preact/jsx-runtime";
         jsx("div", { onClick() { console.log(23333) } });
+        "#,
+        r#"
+        import { jsx } from "preact/jsx-runtime";
+        jsx("div", {});
+        "#
+    );
+
+    test_inline!(
+        Default::default(),
+        |_| as_folder(TreeshakeEventsVisitor::default()),
+        should_remove_events_in_string,
+        r#"
+        import { jsx } from "preact/jsx-runtime";
+        jsx("div", { "onClick": () => console.log(23333) });
+        "#,
+        r#"
+        import { jsx } from "preact/jsx-runtime";
+        jsx("div", {});
+        "#
+    );
+
+    test_inline!(
+        Default::default(),
+        |_| as_folder(TreeshakeEventsVisitor::default()),
+        should_remove_events_in_method_string,
+        r#"
+        import { jsx } from "preact/jsx-runtime";
+        jsx("div", { "onClick"() { console.log(23333) } });
         "#,
         r#"
         import { jsx } from "preact/jsx-runtime";
