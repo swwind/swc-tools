@@ -1747,6 +1747,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "treeshake-events"
+version = "0.1.0"
+dependencies = [
+ "regex",
+ "serde",
+ "serde_json",
+ "swc_core",
+]
+
+[[package]]
 name = "triomphe"
 version = "0.1.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"

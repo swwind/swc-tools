@@ -1,0 +1,23 @@
+{
+  "name": "@swwind/treeshake-events",
+  "version": "2.0.0",
+  "author": "swwind <i@sww.moe>",
+  "license": "MIT",
+  "keywords": [
+    "swc-plugin"
+  ],
+  "main": "./treeshake_events.wasm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swwind/swc-tools.git"
+  },
+  "scripts": {
+    "build": "cargo build-wasi --release && cp ../../target/wasm32-wasi/release/treeshake_events.wasm .",
+    "prepublishOnly": "pnpm build"
+  },
+  "files": [
+    "treeshake_events.wasm",
+    "README.md"
+  ],
+  "preferUnplugged": true
+}

@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm build:remove-exports",
+    "build": "pnpm build:remove-exports && pnpm build:treeshake-events",
     "build:remove-exports": "cd packages/remove-exports && pnpm build",
+    "build:treeshake-events": "cd packages/treeshake-events && pnpm build",
     "test": "node test/index.js"
   },
   "dependencies": {

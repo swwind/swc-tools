@@ -1,7 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-  "packages/remove-exports"
+  "packages/remove-exports",
+  "packages/treeshake-events",
 ]
 
 [profile.release]
