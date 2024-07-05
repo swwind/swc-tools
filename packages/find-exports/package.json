@@ -1,4 +1,29 @@
 {
   "name": "@swwind/find-exports",
-  "version": "2.0.0"
+  "version": "2.0.0",
+  "type": "module",
+  "types": "./mod.d.ts",
+  "module": "./mod.js",
+  "exports": {
+    ".": {
+      "types": "./mod.d.ts",
+      "import": "./mod.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swwind/swc-tools.git"
+  },
+  "files": [
+    "mod.js",
+    "mod.d.ts",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node mod.test.js"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.6.7",
+    "typescript": "^5.5.3"
+  }
 }
