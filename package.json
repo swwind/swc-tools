@@ -1,16 +1,13 @@
 {
   "name": "swc-tools",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "pnpm build:remove-exports",
     "build:remove-exports": "cd packages/remove-exports && pnpm build",
-    "test": "pnpm test:find-exports && pnpm test:remove-exports",
+    "test": "pnpm test:get-exports && pnpm test:find-exports && pnpm test:remove-exports",
+    "test:get-exports": "cd packages/get-exports && pnpm test",
     "test:find-exports": "cd packages/find-exports && pnpm test",
     "test:remove-exports": "cd tests/remove-exports-tests && pnpm test"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
