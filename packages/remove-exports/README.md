@@ -40,3 +40,18 @@ jsc: {
   }
 }
 ```
+
+You can also use the default export as it references where the wasm file is. (ESM only)
+
+```ts
+import removeExports from "@swwind/remove-exports";
+
+plugins: [
+  [
+    removeExports,
+    {
+      /* PluginOptions */
+    },
+  ],
+];
+```

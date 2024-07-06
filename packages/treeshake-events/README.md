@@ -51,3 +51,18 @@ jsc: {
   }
 }
 ```
+
+You can also use the default export as it references where the wasm file is. (ESM only)
+
+```ts
+import treeshakeEvents from "@swwind/treeshake-events";
+
+plugins: [
+  [
+    treeshakeEvents,
+    {
+      /* PluginOptions */
+    },
+  ],
+];
+```

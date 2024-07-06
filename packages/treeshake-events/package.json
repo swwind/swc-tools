@@ -1,12 +1,13 @@
 {
   "name": "@swwind/treeshake-events",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "swwind <i@sww.moe>",
   "license": "MIT",
   "keywords": [
     "swc-plugin"
   ],
   "main": "./treeshake_events.wasm",
+  "module": "./index.mjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swwind/swc-tools.git"
@@ -16,6 +17,7 @@
     "prepublishOnly": "pnpm build"
   },
   "files": [
+    "index.mjs",
     "treeshake_events.wasm",
     "README.md"
   ],
