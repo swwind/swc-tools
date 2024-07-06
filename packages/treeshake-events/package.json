@@ -6,6 +6,8 @@
   "keywords": [
     "swc-plugin"
   ],
+  "type": "module",
+  "main": "./treeshake_events.wasm",
   "types": "./index.d.ts",
   "module": "./index.mjs",
   "repository": {
