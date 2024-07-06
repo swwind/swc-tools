@@ -21,6 +21,8 @@ export const bar = 2333;
 ## Usage
 
 ```ts
+import removeExports from "@swwind/remove-exports";
+
 interface PluginOptions {
   // export names to remove
   removes: string[];
@@ -31,7 +33,7 @@ jsc: {
   experimental: {
     plugins: [
       [
-        "@swwind/remove-exports",
+        removeExports,
         {
           /* PluginOptions */
         },
@@ -41,17 +43,4 @@ jsc: {
 }
 ```
 
-You can also use the default export as it references where the wasm file is. (ESM only)
-
-```ts
-import removeExports from "@swwind/remove-exports";
-
-plugins: [
-  [
-    removeExports,
-    {
-      /* PluginOptions */
-    },
-  ],
-];
-```
+Note: use package name in plugins won't work because this makes pnpm/yarn unhappy.

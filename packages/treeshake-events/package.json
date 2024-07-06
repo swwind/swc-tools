@@ -7,9 +7,14 @@
     "swc-plugin"
   ],
   "type": "module",
-  "main": "./treeshake_events.wasm",
   "types": "./index.d.ts",
   "module": "./index.mjs",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swwind/swc-tools.git"

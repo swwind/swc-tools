@@ -30,6 +30,8 @@ If all the conditions are true, a treeshake of that property will be performed.
 # Usage
 
 ```ts
+import treeshakeEvents from "@swwind/treeshake-events";
+
 interface PluginOptions {
   // jsx function names
   jsxs: string[]; // defaults ['jsx', 'jsxs', 'jsxDEV']
@@ -42,7 +44,7 @@ jsc: {
   experimental: {
     plugins: [
       [
-        "@swwind/treeshake-events",
+        treeshakeEvents,
         {
           /* PluginOptions */
         },
@@ -52,17 +54,4 @@ jsc: {
 }
 ```
 
-You can also use the default export as it references where the wasm file is. (ESM only)
-
-```ts
-import treeshakeEvents from "@swwind/treeshake-events";
-
-plugins: [
-  [
-    treeshakeEvents,
-    {
-      /* PluginOptions */
-    },
-  ],
-];
-```
+Note: use package name in plugins won't work because this makes pnpm/yarn unhappy.

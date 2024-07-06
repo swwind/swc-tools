@@ -1,6 +1,9 @@
 import assert from "node:assert";
 import { transform } from "@swc/core";
 import { describe, it } from "node:test";
+import plugin from "@swwind/remove-exports";
+
+console.log(plugin);
 
 /**
  * @param {string} source
@@ -11,7 +14,7 @@ async function remove_exports(source, removes) {
   const { code } = await transform(source, {
     jsc: {
       experimental: {
-        plugins: [["@swwind/remove-exports", { removes }]],
+        plugins: [[plugin, { removes }]],
       },
       target: "esnext",
     },

@@ -1,6 +1,7 @@
 import assert from "node:assert";
 import { transform } from "@swc/core";
 import { describe, it } from "node:test";
+import plugin from "@swwind/treeshake-events";
 
 /**
  * @param {string} code1
@@ -35,7 +36,7 @@ describe("@swwind/treeshake-events", () => {
             jsx: false,
           },
           experimental: {
-            plugins: [["@swwind/treeshake-events", {}]],
+            plugins: [[plugin, {}]],
           },
           target: "esnext",
         },
@@ -68,7 +69,7 @@ describe("@swwind/treeshake-events", () => {
           experimental: {
             plugins: [
               [
-                "@swwind/treeshake-events",
+                plugin,
                 {
                   jsxs: ["sponge_bob_square_pants"],
                   matches: ["o{5,}"],
