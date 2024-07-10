@@ -1,18 +1,20 @@
 {
   "name": "@swwind/remove-exports",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "swwind <i@sww.moe>",
   "license": "MIT",
   "keywords": [
     "swc-plugin"
   ],
   "type": "module",
+  "main": "./index.cjs",
   "types": "./index.d.ts",
   "module": "./index.mjs",
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./index.mjs"
+      "import": "./index.mjs",
+      "require": "./index.cjs"
     }
   },
   "repository": {
@@ -24,6 +26,7 @@
     "prepublishOnly": "pnpm build"
   },
   "files": [
+    "index.cjs",
     "index.mjs",
     "index.d.ts",
     "remove_exports.wasm",
