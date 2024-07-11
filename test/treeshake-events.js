@@ -36,7 +36,7 @@ describe("@swwind/treeshake-events", () => {
             jsx: false,
           },
           experimental: {
-            plugins: [[plugin, {}]],
+            plugins: [plugin()],
           },
           target: "esnext",
         },
@@ -68,13 +68,10 @@ describe("@swwind/treeshake-events", () => {
           },
           experimental: {
             plugins: [
-              [
-                plugin,
-                {
-                  jsxs: ["sponge_bob_square_pants"],
-                  matches: ["o{5,}"],
-                },
-              ],
+              plugin({
+                jsxs: ["sponge_bob_square_pants"],
+                matches: ["o{5,}"],
+              }),
             ],
           },
           target: "esnext",

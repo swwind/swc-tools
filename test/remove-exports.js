@@ -14,7 +14,7 @@ async function remove_exports(source, removes) {
   const { code } = await transform(source, {
     jsc: {
       experimental: {
-        plugins: [[plugin, { removes }]],
+        plugins: [plugin({ removes })],
       },
       target: "esnext",
     },
