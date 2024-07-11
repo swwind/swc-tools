@@ -34,24 +34,19 @@ import treeshakeEvents from "@swwind/treeshake-events";
 
 interface PluginOptions {
   // jsx function names
-  jsxs: string[]; // defaults ['jsx', 'jsxs', 'jsxDEV']
+  jsxs?: string[]; // defaults ['jsx', 'jsxs', 'jsxDEV']
   // event properties regex
-  matches: string[]; // defaults ['^on[A-Z]']
+  matches?: string[]; // defaults ['^on[A-Z]']
 }
 
 jsc: {
   // ...
   experimental: {
     plugins: [
-      [
-        treeshakeEvents,
-        {
-          /* PluginOptions */
-        },
-      ],
+      treeshakeEvents(options),
     ];
   }
 }
 ```
 
-Note: use package name in plugins won't work because this makes pnpm/yarn unhappy.
+Note: this plugin does not support use module name directly.

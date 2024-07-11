@@ -25,22 +25,17 @@ import removeExports from "@swwind/remove-exports";
 
 interface PluginOptions {
   // export names to remove
-  removes: string[];
+  removes?: string[];
 }
 
 jsc: {
   // ...
   experimental: {
     plugins: [
-      [
-        removeExports,
-        {
-          /* PluginOptions */
-        },
-      ],
+      removeExports(options),
     ];
   }
 }
 ```
 
-Note: use package name in plugins won't work because this makes pnpm/yarn unhappy.
+Note: this plugin does not support use module name directly.
