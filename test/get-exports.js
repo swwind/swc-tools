@@ -149,7 +149,9 @@ describe("@swwind/get-exports", () => {
       export interface four {}
       export declare interface four2 {}
       export declare const five: string;
-      export declare enum six {}
+      export declare enum six {};
+      export type { A };
+      export { type B };
       `),
       []
     );

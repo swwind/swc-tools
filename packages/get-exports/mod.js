@@ -136,25 +136,29 @@ export function get(ast) {
           break;
 
         case "ExportNamedDeclaration":
-          for (const spec of item.specifiers) {
-            switch (spec.type) {
-              // export * as xxx from "xxx"
-              case "ExportNamespaceSpecifier":
-                exports.push(module_export_name(spec.name));
-                break;
-              // export xxx from "xxx"
-              case "ExportDefaultSpecifier":
-                exports.push(identifier(spec.exported));
-                break;
-              // export { foo } from "xxx"
-              // export { foo as bar } from "xxx"
-              case "ExportSpecifier":
-                if (spec.exported) {
-                  exports.push(module_export_name(spec.exported));
-                } else {
-                  exports.push(module_export_name(spec.orig));
-                }
-                break;
+          if (!item.typeOnly) {
+            for (const spec of item.specifiers) {
+              switch (spec.type) {
+                // export * as xxx from "xxx"
+                case "ExportNamespaceSpecifier":
+                  exports.push(module_export_name(spec.name));
+                  break;
+                // export xxx from "xxx"
+                case "ExportDefaultSpecifier":
+                  exports.push(identifier(spec.exported));
+                  break;
+                // export { foo } from "xxx"
+                // export { foo as bar } from "xxx"
+                case "ExportSpecifier":
+                  if (!spec.isTypeOnly) {
+                    if (spec.exported) {
+                      exports.push(module_export_name(spec.exported));
+                    } else {
+                      exports.push(module_export_name(spec.orig));
+                    }
+                  }
+                  break;
+              }
             }
           }
           break;
